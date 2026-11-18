@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
   --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
   --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
@@ -9,14 +9,13 @@
   --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
   --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: #070a14; --color-paper-2: #10192a; --color-paper-3: #1b2a43;
-  --color-ink: #dde3f0; --color-ink-2: #c3ccdd; --color-muted: #98a7c0;
-  --color-rule: rgb(221 227 240 / 0.24); --color-rule-2: rgb(221 227 240 / 0.11);
-  --color-grid: rgb(221 227 240 / 0.05); --color-grid-2: rgb(221 227 240 / 0.12);
-  --color-accent: #536bce; --color-accent-2: #8295e8; --color-accent-ink: #f7f9ff; --color-focus: #8295e8;
-  --color-key: #eef1f8; --color-key-2: #dde3f0; --color-key-ink: #0a1020;
-  --color-iris: #a79ad6; --color-steel: #526f8d; --color-bronze: #c6ad86;
-  --color-halo: rgb(83 107 206 / 0.20);
+  --color-paper: #1c2b45; --color-paper-2: #141f34;
+  --color-ink: #f0f2f8; --color-ink-2: #c3ccff; --color-muted: #a4afc5;
+  --color-rule: rgb(240 242 248 / 0.22); --color-rule-2: rgb(240 242 248 / 0.10);
+  --color-grid: rgb(195 204 255 / 0.07); --color-grid-2: rgb(195 204 255 / 0.16);
+  --color-accent: #4357e8; --color-accent-2: #8295ff; --color-accent-3: #c3ccff; --color-accent-ink: #f0f2f8; --color-focus: #8295ff;
+  --color-key: #f0f2f8; --color-key-2: #c3ccff; --color-key-ink: #070a12;
+  --color-halo: rgb(67 87 232 / 0.24);
   --font-display: "Chakra Petch", ui-sans-serif, sans-serif; --font-body: "IBM Plex Sans", ui-sans-serif, sans-serif;
   --font-outlier: "IBM Plex Mono", ui-monospace, monospace;
   --radius-card: 0; --radius-pill: 0; --rule-hair: 1px; --rule-heavy: 2px; --shadow-card: none;

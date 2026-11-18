@@ -1,5 +1,5 @@
 /* Hallmark · shape: Narrative Workflow · genre: modern-minimal · theme: Blueprint (deal 1/3, seed deltator-fast-censored-network-resistant-tor-f9dd·c2e1dd0a·2026-11-18·r0) · job: try · draw: 05e95e
- * hero: Corridor · nav: banner over a retracting bar · footer: index columns · imagery: race diagram, no photographs · signature: the three-lane race board · blueprint: cyanotype
+ * hero: Corridor · nav: retracting bar · footer: index columns · imagery: race diagram, no photographs · signature: the three-lane race board · blueprint: cyanotype
  * axes: mid/geometric-sans/neutral · posture: drenched · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P5 H4 E5 S5 R4 V5 · weakest: R, one diagram and one figure; the mode list stays a table, not a second drawing */
 @import url("./tokens.css");
@@ -8,7 +8,6 @@
 :root {
   color-scheme: dark;
   --nav-h: 72px;
-  --banner-h: 40px;
   --prose: 65ch;
 }
 
@@ -149,31 +148,13 @@ a:hover { text-decoration-color: transparent; }
 }
 .text-link:hover { color: var(--color-ink); }
 
-/* Banner and nav */
-
-.banner {
-  min-height: var(--banner-h);
-  background: var(--color-paper-2);
-  border-bottom: var(--rule-hair) solid var(--color-rule-2);
-}
-.banner-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-lg);
-  min-height: var(--banner-h);
-  font-size: var(--text-xs);
-  color: var(--color-muted);
-}
-.banner-inner p { margin: 0; }
-.banner-inner a { color: var(--color-accent-2); }
-.banner-inner a:hover { color: var(--color-ink); }
+/* Nav */
 
 .site-head {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky-nav);
-  background: var(--color-paper);
+  background: var(--color-paper-2);
   border-bottom: var(--rule-hair) solid var(--color-rule);
   transition: transform var(--dur-short) var(--ease-out);
 }
@@ -209,12 +190,14 @@ a:hover { text-decoration-color: transparent; }
 .nav-links a:hover { color: var(--color-accent-2); text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--color-accent) 72%, transparent); }
 .nav-action {
   margin-left: var(--space-xs);
-  border-color: color-mix(in oklab, var(--color-accent) 68%, transparent);
+  background: var(--color-accent);
+  border-color: color-mix(in oklab, var(--color-accent-2) 45%, var(--color-accent));
+  color: var(--color-accent-ink);
 }
 .nav-action:hover {
-  background: color-mix(in oklab, var(--color-accent) 18%, transparent);
+  background: var(--color-accent-2);
   border-color: var(--color-accent-2);
-  color: var(--color-ink);
+  color: var(--color-key-ink);
 }
 .nav-menu { display: none; position: relative; margin-left: auto; }
 .nav-menu summary {
@@ -254,10 +237,12 @@ a:hover { text-decoration-color: transparent; }
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: calc(100svh - var(--banner-h) - var(--nav-h));
+  min-height: calc(100svh - var(--nav-h));
   padding-block: var(--space-2xl) var(--space-lg);
   display: flex;
   align-items: stretch;
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
 .hero::before {
   content: "";
@@ -265,8 +250,8 @@ a:hover { text-decoration-color: transparent; }
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(48% 54% at 50% 46%, var(--color-halo), transparent 72%),
-    radial-gradient(26% 34% at 62% 58%, color-mix(in oklab, var(--color-iris) 9%, transparent), transparent 70%);
+    radial-gradient(52% 58% at 50% 46%, var(--color-halo), transparent 74%),
+    radial-gradient(28% 36% at 64% 60%, color-mix(in oklab, var(--color-accent-2) 12%, transparent), transparent 72%);
   pointer-events: none;
 }
 .hero-inner {
@@ -283,7 +268,7 @@ a:hover { text-decoration-color: transparent; }
   margin-inline: auto;
   text-align: center;
 }
-.hero-copy h1 { margin-inline: auto; }
+.hero-copy h1 { max-width: 100%; margin-inline: auto; }
 .hero-copy .lead {
   max-width: 44ch;
   margin: var(--space-md) auto 0;
@@ -357,7 +342,7 @@ a:hover { text-decoration-color: transparent; }
   margin: 0;
   padding: var(--space-lg);
   border: var(--rule-hair) solid var(--color-rule);
-  background-color: var(--color-paper-3);
+  background-color: var(--color-paper-2);
   background-image:
     linear-gradient(var(--color-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--color-grid) 1px, transparent 1px),
@@ -393,11 +378,11 @@ a:hover { text-decoration-color: transparent; }
   font-weight: 500;
   font-size: var(--text-sm);
 }
-.lane.is-winner { background: color-mix(in oklab, var(--color-accent) 10%, transparent); }
+.lane.is-winner { background: color-mix(in oklab, var(--color-accent) 14%, transparent); }
 .lane.is-winner .lane-fill { background: var(--color-accent); }
 .lane.is-winner .lane-pct,
 .lane.is-winner .lane-status { color: var(--color-accent-2); }
-.lane.is-stopped .lane-fill { background: var(--color-steel); }
+.lane.is-stopped .lane-fill { background: color-mix(in oklab, var(--color-muted) 55%, transparent); }
 
 .lane-track {
   position: relative;
@@ -432,7 +417,7 @@ a:hover { text-decoration-color: transparent; }
   margin-top: var(--space-lg);
   padding-bottom: var(--space-sm);
   font-size: var(--text-xs);
-  color: var(--color-bronze);
+  color: var(--color-muted);
 }
 .dim-value { text-align: center; color: var(--color-accent-2); }
 .dim-line {
@@ -525,7 +510,6 @@ a:hover { text-decoration-color: transparent; }
   font-weight: var(--display-weight);
   font-variant-numeric: tabular-nums;
   line-height: 0.9;
-  color: var(--color-accent-2);
 }
 .core-figure span:last-child {
   max-width: 16ch;
@@ -622,7 +606,7 @@ a:hover { text-decoration-color: transparent; }
 .download {
   margin-top: var(--space-xl);
   padding-block: var(--section-gap);
-  background: var(--color-paper-3);
+  background: var(--color-paper);
   border-block: var(--rule-hair) solid var(--color-rule-2);
   border-top-color: color-mix(in oklab, var(--color-accent) 62%, transparent);
 }
@@ -648,6 +632,7 @@ a:hover { text-decoration-color: transparent; }
   align-items: flex-start;
   gap: var(--space-md);
   padding: var(--space-xl);
+  background: var(--color-paper-2);
   border: var(--rule-hair) solid var(--color-rule);
 }
 .offer-top {
@@ -681,6 +666,7 @@ a:hover { text-decoration-color: transparent; }
 
 .site-foot {
   border-top: var(--rule-heavy) solid var(--color-rule);
+  background: var(--color-paper);
   padding-block: var(--space-2xl) var(--space-lg);
 }
 .foot-grid {
@@ -734,8 +720,6 @@ a:hover { text-decoration-color: transparent; }
 }
 
 @media (max-width: 40rem) {
-  .banner-date { display: none; }
-  .banner-sep { display: none; }
   .download-head { display: block; }
   .download-head .text-link { display: inline-block; margin-top: var(--space-md); }
   .hero { padding-block: var(--space-xl) var(--space-md); }
