@@ -19,9 +19,9 @@
 <meta property="og:image:width" content="256">
 <meta property="og:image:height" content="256">
 <meta property="og:image:alt" content="DeltaTor app icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/neue-machina-ultrabold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <script type="application/ld+json">
 {
@@ -250,7 +250,7 @@
     <div class="container grid">
       <div class="head-block span-5">
         <h2 id="collector-title">The bridge collector</h2>
-        <p class="lead">Collects, validates and archives bridges every hour.</p>
+        <p class="lead">Collects, validates and archives bridges <span class="num">every hour</span>.</p>
       </div>
       <div class="span-7 collector-body">
         <p class="repo-link"><a class="text-link" href="https://github.com/Delta-Kronecker/Tor-Bridges-Collector">Delta-Kronecker/Tor-Bridges-Collector</a></p>
@@ -353,7 +353,7 @@
         <li><a href="https://github.com/Delta-Kronecker/Delta-Tor/issues">Issues</a></li>
       </ul>
     </nav>
-    <nav class="foot-col" aria-label="Components">
+    <nav class="foot-col foot-col--tech" aria-label="Components">
       <h2>Components</h2>
       <ul>
         <li><a href="https://github.com/Delta-Kronecker/tor">Tor fork</a></li>
