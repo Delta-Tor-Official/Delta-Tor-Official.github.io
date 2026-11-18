@@ -70,11 +70,11 @@ a:hover { text-decoration-color: transparent; }
 .btn:active { transform: translateY(1px); }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .btn--primary {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-accent-ink);
+  background: var(--color-key);
+  border-color: var(--color-key);
+  color: var(--color-key-ink);
 }
-.btn--primary:hover { background: var(--color-ink-2); border-color: var(--color-ink-2); }
+.btn--primary:hover { background: var(--color-key-2); border-color: var(--color-key-2); }
 .btn--small { min-height: 44px; padding-inline: var(--space-md); font-size: var(--text-sm); }
 
 /* Download keys: the page's main action */
@@ -106,12 +106,12 @@ a:hover { text-decoration-color: transparent; }
 }
 .dl-key:active { transform: translateY(1px); }
 .dl-key--primary {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-accent-ink);
+  background: var(--color-key);
+  border-color: var(--color-key);
+  color: var(--color-key-ink);
 }
-.dl-key--primary::before { border-color: color-mix(in oklab, var(--color-accent-ink) 30%, transparent); }
-.dl-key--primary:hover { background: var(--color-ink-2); border-color: var(--color-ink-2); }
+.dl-key--primary::before { border-color: color-mix(in oklab, var(--color-key-ink) 32%, transparent); }
+.dl-key--primary:hover { background: var(--color-key-2); border-color: var(--color-key-2); }
 .dl-key-icon {
   display: grid;
   place-items: center;
@@ -143,9 +143,11 @@ a:hover { text-decoration-color: transparent; }
 
 .text-link {
   font-size: var(--text-sm);
-  color: var(--color-ink-2);
+  color: var(--color-accent-2);
+  text-decoration-color: color-mix(in oklab, var(--color-accent) 72%, transparent);
   text-underline-offset: 0.24em;
 }
+.text-link:hover { color: var(--color-ink); }
 
 /* Banner and nav */
 
@@ -164,7 +166,8 @@ a:hover { text-decoration-color: transparent; }
   color: var(--color-muted);
 }
 .banner-inner p { margin: 0; }
-.banner-inner a { color: var(--color-ink-2); }
+.banner-inner a { color: var(--color-accent-2); }
+.banner-inner a:hover { color: var(--color-ink); }
 
 .site-head {
   position: sticky;
@@ -203,8 +206,16 @@ a:hover { text-decoration-color: transparent; }
   font-size: var(--text-sm);
 }
 .nav-links a { text-decoration: none; color: var(--color-ink-2); }
-.nav-links a:hover { color: var(--color-ink); text-decoration: underline; }
-.nav-action { margin-left: var(--space-xs); }
+.nav-links a:hover { color: var(--color-accent-2); text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--color-accent) 72%, transparent); }
+.nav-action {
+  margin-left: var(--space-xs);
+  border-color: color-mix(in oklab, var(--color-accent) 68%, transparent);
+}
+.nav-action:hover {
+  background: color-mix(in oklab, var(--color-accent) 18%, transparent);
+  border-color: var(--color-accent-2);
+  color: var(--color-ink);
+}
 .nav-menu { display: none; position: relative; margin-left: auto; }
 .nav-menu summary {
   display: flex;
@@ -241,12 +252,26 @@ a:hover { text-decoration-color: transparent; }
 /* Hero */
 
 .hero {
+  position: relative;
+  isolation: isolate;
   min-height: calc(100svh - var(--banner-h) - var(--nav-h));
   padding-block: var(--space-2xl) var(--space-lg);
   display: flex;
   align-items: stretch;
 }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(48% 54% at 50% 46%, var(--color-halo), transparent 72%),
+    radial-gradient(26% 34% at 62% 58%, color-mix(in oklab, var(--color-iris) 9%, transparent), transparent 70%);
+  pointer-events: none;
+}
 .hero-inner {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-rows: 1fr auto;
   row-gap: var(--space-xl);
@@ -368,10 +393,11 @@ a:hover { text-decoration-color: transparent; }
   font-weight: 500;
   font-size: var(--text-sm);
 }
-.lane.is-winner { background: color-mix(in oklab, var(--color-ink) 8%, transparent); }
-.lane.is-winner .lane-fill { background: var(--color-ink); }
-.lane.is-winner .lane-status { color: var(--color-ink); }
-.lane.is-stopped .lane-fill { background: var(--color-muted); }
+.lane.is-winner { background: color-mix(in oklab, var(--color-accent) 10%, transparent); }
+.lane.is-winner .lane-fill { background: var(--color-accent); }
+.lane.is-winner .lane-pct,
+.lane.is-winner .lane-status { color: var(--color-accent-2); }
+.lane.is-stopped .lane-fill { background: var(--color-steel); }
 
 .lane-track {
   position: relative;
@@ -406,9 +432,9 @@ a:hover { text-decoration-color: transparent; }
   margin-top: var(--space-lg);
   padding-bottom: var(--space-sm);
   font-size: var(--text-xs);
-  color: var(--color-muted);
+  color: var(--color-bronze);
 }
-.dim-value { text-align: center; color: var(--color-ink-2); }
+.dim-value { text-align: center; color: var(--color-accent-2); }
 .dim-line {
   position: absolute;
   left: 0;
@@ -499,6 +525,7 @@ a:hover { text-decoration-color: transparent; }
   font-weight: var(--display-weight);
   font-variant-numeric: tabular-nums;
   line-height: 0.9;
+  color: var(--color-accent-2);
 }
 .core-figure span:last-child {
   max-width: 16ch;
@@ -597,6 +624,7 @@ a:hover { text-decoration-color: transparent; }
   padding-block: var(--section-gap);
   background: var(--color-paper-3);
   border-block: var(--rule-hair) solid var(--color-rule-2);
+  border-top-color: color-mix(in oklab, var(--color-accent) 62%, transparent);
 }
 .download-head {
   display: flex;
@@ -674,7 +702,7 @@ a:hover { text-decoration-color: transparent; }
 .foot-col ul { margin: 0; padding: 0; list-style: none; }
 .foot-col li { margin-bottom: var(--space-xs); }
 .foot-col a { font-size: var(--text-sm); color: var(--color-ink-2); text-decoration: none; }
-.foot-col a:hover { color: var(--color-ink); text-decoration: underline; }
+.foot-col a:hover { color: var(--color-accent-2); text-decoration: underline; }
 .foot-legal {
   margin-top: var(--space-2xl);
   padding-top: var(--space-md);
