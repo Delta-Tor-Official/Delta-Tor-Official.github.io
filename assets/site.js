@@ -31,12 +31,10 @@
     });
   }
 
-  /* The race board: a demonstration of the engine, replayed on demand. */
+  /* The race board: a demonstration of the engine, replayed when it scrolls in. */
   var board = document.querySelector(".race-board");
   var lanes = Array.prototype.slice.call(document.querySelectorAll(".lane"));
-  var runButton = document.querySelector("[data-race-run]");
   var raceFrame = 0;
-  var running = false;
 
   var paintLane = function (lane, progress, status) {
     var value = Math.round(progress * 100);
@@ -63,7 +61,6 @@
 
   var settleRace = function () {
     window.cancelAnimationFrame(raceFrame);
-    running = false;
     lanes.forEach(function (lane) {
       var end = endOf(lane);
       paintLane(lane, end, end === 1 ? "circuit up" : "stopped");
@@ -73,7 +70,6 @@
   var runRace = function () {
     if (!lanes.length) return;
     window.cancelAnimationFrame(raceFrame);
-    running = true;
 
     var plans = lanes.map(function (lane, index) {
       var end = endOf(lane);
@@ -110,19 +106,10 @@
         lanes.forEach(function (lane) {
           paintLane(lane, endOf(lane), endOf(lane) === 1 ? "circuit up" : "stopped");
         });
-        running = false;
       }
     };
     raceFrame = window.requestAnimationFrame(frame);
   };
-
-  if (runButton) {
-    runButton.addEventListener("click", function () {
-      if (running) return;
-      if (reduce.matches) settleRace();
-      else runRace();
-    });
-  }
 
   if (board && lanes.length && "IntersectionObserver" in window) {
     var seen = false;

@@ -124,21 +124,21 @@
   <section class="section race-section" id="how" aria-labelledby="race-title">
     <div class="container grid">
       <div class="head-block span-5">
-        <h2 id="race-title">Three runners, one circuit</h2>
-        <p class="lead">Each connect starts three transports. The first circuit wins; the rest stop.</p>
+        <h2 id="race-title">Four runners, one circuit</h2>
+        <p class="lead">Each connect starts three transports. Remembered bridges race too, and often win.</p>
       </div>
 
-      <figure class="race span-7" aria-labelledby="race-caption">
+      <figure class="race span-7" aria-label="Race board">
         <div class="race-board">
-          <div class="lane is-winner" data-runner="vanilla" data-end="1">
+          <div class="lane" data-runner="vanilla" data-end=".62">
             <div class="lane-id">
               <span class="lane-name">Vanilla</span>
             </div>
-            <div class="lane-track" role="progressbar" aria-label="Vanilla runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
-              <span class="lane-fill" style="transform: scaleX(1)"></span>
+            <div class="lane-track" role="progressbar" aria-label="Vanilla runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62">
+              <span class="lane-fill" style="transform: scaleX(.62)"></span>
             </div>
-            <span class="lane-pct num" data-pct>100%</span>
-            <span class="lane-status" data-status>circuit up</span>
+            <span class="lane-pct num" data-pct>62%</span>
+            <span class="lane-status" data-status>stopped</span>
           </div>
 
           <div class="lane" data-runner="obfs4" data-end=".38">
@@ -163,17 +163,23 @@
             <span class="lane-status" data-status>stopped</span>
           </div>
 
+          <div class="lane is-winner" data-runner="memory" data-end="1">
+            <div class="lane-id">
+              <span class="lane-name">Memory</span>
+            </div>
+            <div class="lane-track" role="progressbar" aria-label="Memory runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+              <span class="lane-fill" style="transform: scaleX(1)"></span>
+            </div>
+            <span class="lane-pct num" data-pct>100%</span>
+            <span class="lane-status" data-status>circuit up</span>
+          </div>
+
           <div class="dim" aria-hidden="true">
             <span>start</span>
             <span class="dim-value num">first to 100%</span>
             <span>circuit</span>
             <span class="dim-line"></span>
           </div>
-        </div>
-
-        <div class="race-foot">
-          <figcaption id="race-caption">A live demonstration. Proven bridges come back next time.</figcaption>
-          <button class="btn btn--small" type="button" data-race-run>Run the race again</button>
         </div>
       </figure>
     </div>
