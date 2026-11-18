@@ -3,16 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DeltaTor: Tor that gets through, on Android and Windows</title>
-<meta name="description" content="DeltaTor starts up to four Tor clients at once and keeps the first working circuit. Direct APK and portable Windows downloads.">
+<title>DeltaTor: Tor that gets faster each time</title>
+<meta name="description" content="DeltaTor races up to four Tor clients, keeps the first working circuit, then reuses the bridges that worked. Direct Android and Windows downloads.">
 <link rel="canonical" href="https://delta-tor-official.github.io/">
 <meta name="theme-color" content="#0d3970">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/app-icon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/app-icon-256.png" sizes="256x256" type="image/png">
+<link rel="apple-touch-icon" href="assets/app-icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DeltaTor">
-<meta property="og:title" content="DeltaTor: Tor that gets through">
-<meta property="og:description" content="Up to four Tor clients race at once. The first working circuit wins. Direct downloads for Android and Windows.">
+<meta property="og:title" content="DeltaTor: Tor that gets faster each time">
+<meta property="og:description" content="Up to four Tor clients race at once. The first working circuit wins, and the bridges that worked come back. Direct downloads for Android and Windows.">
 <meta property="og:url" content="https://delta-tor-official.github.io/">
+<meta property="og:image" content="https://delta-tor-official.github.io/assets/app-icon-256.png">
+<meta property="og:image:width" content="256">
+<meta property="og:image:height" content="256">
+<meta property="og:image:alt" content="DeltaTor app icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -24,8 +30,9 @@
   "name": "DeltaTor",
   "applicationCategory": "SecurityApplication",
   "operatingSystem": "Android, Windows",
-  "description": "A Tor client for Android and Windows that races up to four clients in parallel and keeps the first working circuit.",
+  "description": "A Tor client for Android and Windows that races up to four clients in parallel, keeps the first working circuit and reuses the bridges that worked.",
   "license": "https://github.com/Delta-Kronecker/Delta-Tor/blob/main/LICENSE",
+  "image": "https://delta-tor-official.github.io/assets/app-icon-256.png",
   "codeRepository": "https://github.com/Delta-Kronecker/Delta-Tor",
   "downloadUrl": "https://github.com/Delta-Kronecker/Delta-Tor/releases/latest/download/deltator-v2.3.0-universal.apk",
   "softwareVersion": "2.3.0",
@@ -37,7 +44,7 @@
 
 <div class="banner">
   <div class="container banner-inner">
-    <p><span data-release-version>v2.3.0</span>, <span class="banner-date" data-release-date>22 October 2026</span></p>
+    <p><span data-release-version>v2.3.0</span><span class="banner-sep">, </span><span class="banner-date" data-release-date>22 October 2026</span></p>
     <a href="https://github.com/Delta-Kronecker/Delta-Tor/releases/latest" data-release-url>Release notes</a>
   </div>
 </div>
@@ -45,10 +52,7 @@
 <header class="site-head">
   <nav class="container site-nav" aria-label="Main">
     <a class="wordmark" href="#top" aria-label="DeltaTor, back to top">
-      <svg class="wordmark-mark" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">
-        <path d="M10 2.5 18 17.5H2Z" fill="none" stroke="currentColor" stroke-width="1.5"></path>
-        <path d="M6.4 12.2h7.2" fill="none" stroke="currentColor" stroke-width="1.5"></path>
-      </svg>
+      <img class="wordmark-mark" src="assets/app-icon-48.png" width="24" height="24" alt="">
       DeltaTor
     </a>
     <ul class="nav-links">
@@ -76,8 +80,8 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <h1 id="hero-title">Tor that gets through</h1>
-        <p class="lead">Up to four clients race at once. The first working circuit wins.</p>
+        <h1 id="hero-title">Tor that gets faster each time</h1>
+        <p class="lead">Protocols race at once. The first working circuit wins.</p>
         <div class="hero-actions">
           <a class="dl-key dl-key--primary" href="https://github.com/Delta-Kronecker/Delta-Tor/releases/download/v2.3.0/deltator-v2.3.0-universal.apk" data-dl="android">
             <span class="dl-key-icon" aria-hidden="true">
@@ -127,55 +131,43 @@
   <section class="section race-section" id="how" aria-labelledby="race-title">
     <div class="container grid">
       <div class="head-block span-5">
-        <h2 id="race-title">Four runners, one circuit</h2>
-        <p class="lead">Each connect starts up to four clients. The first circuit wins; the rest stop.</p>
+        <h2 id="race-title">Three runners, one circuit</h2>
+        <p class="lead">Each connect starts three transports. The first circuit wins; the rest stop.</p>
       </div>
 
       <figure class="race span-7" aria-labelledby="race-caption">
         <div class="race-board">
-          <div class="lane" data-runner="vanilla">
+          <div class="lane is-winner" data-runner="vanilla" data-end="1">
             <div class="lane-id">
               <span class="lane-name">Vanilla</span>
             </div>
-            <div class="lane-track" role="progressbar" aria-label="Vanilla runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="46">
-              <span class="lane-fill" style="transform: scaleX(.46)"></span>
-            </div>
-            <span class="lane-pct num" data-pct>46%</span>
-            <span class="lane-status" data-status>stopped</span>
-          </div>
-
-          <div class="lane" data-runner="obfs4">
-            <div class="lane-id">
-              <span class="lane-name">Obfs4</span>
-            </div>
-            <div class="lane-track" role="progressbar" aria-label="Obfs4 runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68">
-              <span class="lane-fill" style="transform: scaleX(.68)"></span>
-            </div>
-            <span class="lane-pct num" data-pct>68%</span>
-            <span class="lane-status" data-status>stopped</span>
-          </div>
-
-          <div class="lane" data-runner="webtunnel">
-            <div class="lane-id">
-              <span class="lane-name">Webtunnel</span>
-            </div>
-            <div class="lane-track" role="progressbar" aria-label="Webtunnel runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="31">
-              <span class="lane-fill" style="transform: scaleX(.31)"></span>
-            </div>
-            <span class="lane-pct num" data-pct>31%</span>
-            <span class="lane-status" data-status>stopped</span>
-          </div>
-
-          <div class="lane is-winner" data-runner="memory">
-            <div class="lane-id">
-              <span class="lane-name">Memory</span>
-              <span class="lane-sub">known-good bridges</span>
-            </div>
-            <div class="lane-track" role="progressbar" aria-label="Memory runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+            <div class="lane-track" role="progressbar" aria-label="Vanilla runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
               <span class="lane-fill" style="transform: scaleX(1)"></span>
             </div>
             <span class="lane-pct num" data-pct>100%</span>
             <span class="lane-status" data-status>circuit up</span>
+          </div>
+
+          <div class="lane" data-runner="obfs4" data-end=".38">
+            <div class="lane-id">
+              <span class="lane-name">Obfs4</span>
+            </div>
+            <div class="lane-track" role="progressbar" aria-label="Obfs4 runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38">
+              <span class="lane-fill" style="transform: scaleX(.38)"></span>
+            </div>
+            <span class="lane-pct num" data-pct>38%</span>
+            <span class="lane-status" data-status>stopped</span>
+          </div>
+
+          <div class="lane" data-runner="webtunnel" data-end=".18">
+            <div class="lane-id">
+              <span class="lane-name">Webtunnel</span>
+            </div>
+            <div class="lane-track" role="progressbar" aria-label="Webtunnel runner progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="18">
+              <span class="lane-fill" style="transform: scaleX(.18)"></span>
+            </div>
+            <span class="lane-pct num" data-pct>18%</span>
+            <span class="lane-status" data-status>stopped</span>
           </div>
 
           <div class="dim" aria-hidden="true">
@@ -187,7 +179,7 @@
         </div>
 
         <div class="race-foot">
-          <figcaption id="race-caption">A live demonstration. Memory joins after a bridge works.</figcaption>
+          <figcaption id="race-caption">A live demonstration. Proven bridges come back next time.</figcaption>
           <button class="btn btn--small" type="button" data-race-run>Run the race again</button>
         </div>
       </figure>
@@ -207,28 +199,46 @@
           <tr><th scope="col">Mode</th><th scope="col">What it does</th></tr>
         </thead>
         <tbody>
+          <tr><th scope="row">combined</th><td>cached lists</td></tr>
           <tr><th scope="row">auto</th><td>the race</td></tr>
+          <tr><th scope="row">fresh</th><td>six 72-hour lists</td></tr>
+          <tr><th scope="row">direct</th><td>no bridge</td></tr>
           <tr><th scope="row">vanilla</th><td>direct bridges</td></tr>
           <tr><th scope="row">obfs4</th><td>shaped traffic</td></tr>
           <tr><th scope="row">webtunnel</th><td>bridges over HTTPS</td></tr>
           <tr><th scope="row">snowflake</th><td>volunteer proxies</td></tr>
-          <tr><th scope="row">dnstt</th><td>DNS tunnels</td></tr>
           <tr><th scope="row">meek_lite</th><td>domain fronting</td></tr>
-          <tr><th scope="row">fresh</th><td>six 72-hour lists</td></tr>
-          <tr><th scope="row">combined</th><td>cached lists</td></tr>
-          <tr><th scope="row">direct</th><td>no bridge</td></tr>
+          <tr><th scope="row">dnstt</th><td>DNS tunnels</td></tr>
           <tr><th scope="row">custom</th><td>your bridges</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <section class="band core" aria-labelledby="core-title">
+  <section class="section more" aria-labelledby="more-title">
+    <div class="container">
+      <div class="head-block head-wide">
+        <h2 id="more-title">Beyond the race</h2>
+      </div>
+
+      <dl class="more-register">
+        <div><dt>Proxy chain</dt><dd>Tor → SSTP → VPN Gate, latency-ranked.</dd></div>
+        <div><dt>Split tunneling</dt><dd>Per-app: through the tunnel or around it.</dd></div>
+        <div><dt>Exit country</dt><dd>Ranked by bandwidth; steers live circuits.</dd></div>
+        <div><dt>Proxy only</dt><dd>A SOCKS5 endpoint, no VPN interface.</dd></div>
+        <div><dt>Bridge pool</dt><dd>Success counts, 300 per transport, zip export.</dd></div>
+        <div><dt>Windows twin</dt><dd>Portable: system proxy, full tunnel, tray.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section core" aria-labelledby="core-title">
     <div class="container grid">
       <div class="span-5 core-intro">
         <h2 id="core-title">Tuned, not stock</h2>
         <p class="lead">The core is a Tor fork built for speed.</p>
-        <p class="core-figure"><span class="num">32</span> <span>sets of 2 legs,<br>ranked by RTT</span></p>
+        <p class="core-figure"><span class="num">32</span> <span>sets of 2 legs,<br>ranked by speed</span></p>
+        <p class="repo-link"><a class="text-link" href="https://github.com/Delta-Kronecker/tor">Delta-Kronecker/tor</a></p>
       </div>
       <dl class="register span-7">
         <div><dt>Conflux</dt><dd>Linked multi-leg circuits.</dd></div>
@@ -239,23 +249,15 @@
     </div>
   </section>
 
-  <section class="section more" aria-labelledby="more-title">
-    <div class="container">
-      <div class="head-block head-wide">
-        <h2 id="more-title">Beyond the race</h2>
-        <p class="lead">The parts you notice only when a network fights back.</p>
+  <section class="section collector" aria-labelledby="collector-title">
+    <div class="container grid">
+      <div class="head-block span-5">
+        <h2 id="collector-title">The bridge collector</h2>
+        <p class="lead">Collects, validates and archives bridges every hour.</p>
       </div>
-
-      <dl class="more-register">
-        <div><dt>Proxy chain</dt><dd>Tor → SSTP → VPN Gate, latency-ranked.</dd></div>
-        <div><dt>Split tunneling</dt><dd>Per-app: through the tunnel or around it.</dd></div>
-        <div><dt>Exit country</dt><dd>Ranked by bandwidth; steers live circuits.</dd></div>
-        <div><dt>Proxy only</dt><dd>A SOCKS5 endpoint, no VPN interface.</dd></div>
-        <div><dt>Bridge pool</dt><dd>Success counts, 300 per transport, zip export.</dd></div>
-        <div><dt>Recovery</dt><dd>Stall timeout, then a race that reuses memory.</dd></div>
-        <div><dt>Updater</dt><dd>Finds, downloads and installs the next APK.</dd></div>
-        <div><dt>Windows twin</dt><dd>Portable: system proxy, full tunnel, tray.</dd></div>
-      </dl>
+      <div class="span-7 collector-body">
+        <p class="repo-link"><a class="text-link" href="https://github.com/Delta-Kronecker/Tor-Bridges-Collector">Delta-Kronecker/Tor-Bridges-Collector</a></p>
+      </div>
     </div>
   </section>
 
@@ -343,7 +345,7 @@
 <footer class="site-foot">
   <div class="container foot-grid">
     <div class="foot-brand">
-      <a class="wordmark" href="#top" aria-label="DeltaTor, back to top">DeltaTor</a>
+      <a class="wordmark" href="#top" aria-label="DeltaTor, back to top"><img class="wordmark-mark" src="assets/app-icon-48.png" width="22" height="22" alt="">DeltaTor</a>
       <p>A Tor client for Android and Windows. MIT licensed.</p>
     </div>
     <nav class="foot-col" aria-label="Project">

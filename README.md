@@ -17,7 +17,7 @@ python -m http.server 8000
 | `assets/tokens.css` | Colour, type, spacing and motion tokens |
 | `assets/base.css` | Base rules shared by the sheet system |
 | `assets/site.js` | Race demonstration, nav behaviour, latest-release links |
-| `assets/favicon.svg` | Favicon and wordmark mark |
+| `assets/app-icon-*.png` | App icon at 32, 48, 180 and 256 px; used for the favicon, touch icon and nav mark |
 | `.github/workflows/pages.yml` | Deploys the folder to GitHub Pages on every push to `main` |
 
 ## Deploy
@@ -47,6 +47,7 @@ The API call is unauthenticated and limited by GitHub to 60 requests per hour pe
 - Copy lives in `index.html`; there are no templating placeholders.
 - Colours, type and spacing live in `assets/tokens.css`; `assets/site.css` only uses those tokens.
 - The page is set in Chakra Petch, IBM Plex Sans and IBM Plex Mono, loaded from Google Fonts.
+- The icon comes from the app itself (`Windows/assets/app/DeltaTor.ico` and the Android launcher). Replace the four PNGs in `assets/` if the app icon changes.
 - The release facts in the hero title block, the privacy register and the download panels come from the project README and the v2.3.0 release. Keep them in step with the product.
 
 ## License

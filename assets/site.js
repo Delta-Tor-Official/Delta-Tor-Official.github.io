@@ -56,16 +56,17 @@
     lane.classList.toggle("is-stopped", status === "stopped");
   };
 
+  var endOf = function (lane) {
+    var raw = parseFloat(lane.getAttribute("data-end"));
+    return isNaN(raw) ? 1 : Math.max(0, Math.min(1, raw));
+  };
+
   var settleRace = function () {
     window.cancelAnimationFrame(raceFrame);
     running = false;
-    var winner = Math.floor(Math.random() * lanes.length);
-    lanes.forEach(function (lane, index) {
-      paintLane(
-        lane,
-        index === winner ? 1 : 0.18 + Math.random() * 0.62,
-        index === winner ? "circuit up" : "stopped"
-      );
+    lanes.forEach(function (lane) {
+      var end = endOf(lane);
+      paintLane(lane, end, end === 1 ? "circuit up" : "stopped");
     });
   };
 
@@ -74,12 +75,12 @@
     window.cancelAnimationFrame(raceFrame);
     running = true;
 
-    var winner = Math.floor(Math.random() * lanes.length);
     var plans = lanes.map(function (lane, index) {
-      var wins = index === winner;
+      var end = endOf(lane);
+      var wins = end === 1;
       return {
-        end: wins ? 1 : 0.18 + Math.random() * 0.62,
-        at: wins ? 0.76 + Math.random() * 0.16 : 0.42 + Math.random() * 0.36
+        end: end,
+        at: wins ? 0.76 + Math.random() * 0.16 : 0.4 + index * 0.08 + Math.random() * 0.12
       };
     });
 
@@ -96,16 +97,18 @@
         var plan = plans[index];
         var local = Math.min(1, t / plan.at);
         var eased = 1 - Math.pow(1 - local, 3);
-        var status = t >= plan.at
-          ? (index === winner ? "circuit up" : "stopped")
-          : "connecting";
-        paintLane(lane, plan.end * eased, status);
+        var done = t >= plan.at;
+        paintLane(
+          lane,
+          plan.end * eased,
+          done ? (plan.end === 1 ? "circuit up" : "stopped") : "connecting"
+        );
       });
       if (t < 1) {
         raceFrame = window.requestAnimationFrame(frame);
       } else {
-        lanes.forEach(function (lane, index) {
-          paintLane(lane, index === winner ? 1 : plans[index].end, index === winner ? "circuit up" : "stopped");
+        lanes.forEach(function (lane) {
+          paintLane(lane, endOf(lane), endOf(lane) === 1 ? "circuit up" : "stopped");
         });
         running = false;
       }
